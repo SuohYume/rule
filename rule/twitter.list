@@ -1,0 +1,16 @@
+# Twitter 核心
+DOMAIN-SUFFIX,twitter.com
+DOMAIN-SUFFIX,t.co
+
+# Twitter API
+DOMAIN-SUFFIX,api.twitter.com
+DOMAIN-SUFFIX,upload.twitter.com
+DOMAIN-SUFFIX,ton.twitter.com
+
+# 静态资源 & CDN
+DOMAIN-SUFFIX,twimg.com
+DOMAIN-SUFFIX,twimg.co
+DOMAIN-SUFFIX,twimg.org
+DOMAIN-SUFFIX,pbs.twimg.com
+DOMAIN-SUFFIX,video.twimg.com
+DOMAIN-SUFFIX,abs.twimg.com
