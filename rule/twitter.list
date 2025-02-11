@@ -1,16 +1,22 @@
-# Twitter 核心
+# Twitter
+DOMAIN-KEYWORD,twitter
+DOMAIN-SUFFIX,ads-twitter.com
+DOMAIN-SUFFIX,berlintwitterwall.com
+DOMAIN-SUFFIX,financetwitter.com
+DOMAIN-SUFFIX,simbolostwitter.com
+DOMAIN-SUFFIX,turbotwitter.com
 DOMAIN-SUFFIX,twitter.com
+DOMAIN-SUFFIX,twitter.jp
+DOMAIN-SUFFIX,twitter4j.org
+DOMAIN-SUFFIX,twittercounter.com
+DOMAIN-SUFFIX,twitterfeed.com
+DOMAIN-SUFFIX,twittergadget.com
+DOMAIN-SUFFIX,twitterkr.com
+DOMAIN-SUFFIX,twittermail.com
+DOMAIN-SUFFIX,twitterrific.com
+DOMAIN-SUFFIX,twittertim.es
+
 DOMAIN-SUFFIX,t.co
-
-# Twitter API
-DOMAIN-SUFFIX,api.twitter.com
-DOMAIN-SUFFIX,upload.twitter.com
-DOMAIN-SUFFIX,ton.twitter.com
-
-# 静态资源 & CDN
-DOMAIN-SUFFIX,twimg.com
 DOMAIN-SUFFIX,twimg.co
+DOMAIN-SUFFIX,twimg.com
 DOMAIN-SUFFIX,twimg.org
-DOMAIN-SUFFIX,pbs.twimg.com
-DOMAIN-SUFFIX,video.twimg.com
-DOMAIN-SUFFIX,abs.twimg.com
