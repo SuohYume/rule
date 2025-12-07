@@ -2,3 +2,7 @@ format¶
 格式，可选 yaml/text/mrs，默认 yaml
 
 mrs目前 behavior 仅支持 domain/ipcidr，可以通过mihomo convert-ruleset domain/ipcidr yaml/text XXX.yaml XXX.mrs转换得到
+
+https://wiki.metacubex.one/config/rule-providers/#path
+
+https://linux.do/t/topic/925630
