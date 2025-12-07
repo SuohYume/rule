@@ -8,3 +8,23 @@ Microsoft独立
 PayPal独立
 
 https://github.com/MetaCubeX/meta-rules-dat/tree/meta
+
+微软测试
+
+应该走代理的：
+测试目标,顶级域名/核心服务 (来自您的列表),完整测试域名 (举例)
+国际版 OneDrive,+.onedrive / +.1drv.com / +.livefilestore.com,onedrive.live.com (登录)；api.onedrive.com (同步)
+国际版 Office 365,+.office.com / +.office365.com / +.sharepoint.com,portal.office.com (门户)；outlook.office.com (邮箱)
+GitHub,+.github.com / +.githubassets.com / +.ghcr.io,github.com；codeload.github.com (克隆下载)
+Xbox & 游戏,+.xbox.com / +.xboxlive.com / +.gamepass.com,www.xbox.com (商店)；prodforza.blob.core.windows.net (游戏资源)
+Skype & Teams,+.skype.com / +.microsoftteams.com,api.skype.com；teams.microsoft.com
+国际 Azure/CDN,azure.microsoft.com / +.azure.net / az764295.vo.msecnd.net,portal.azure.com (管理门户)；az764295.vo.msecnd.net (CDN资源)
+Bing 国际,+.bing.com / +.bing.net,www.bing.com (确保走国际节点而非国内)
+
+应该走直连的：
+测试目标,顶级域名/核心服务 (来自您的列表),完整测试域名 (举例)
+网络连通性检测 (NCSI),+.msftconnecttest.com / +.msftncsi.com,www.msftconnecttest.com/connecttest.txt (访问此文本文件)；www.msftncsi.com/ncsi.txt
+Windows 更新,+.windowsupdate.com / +.dl.delivery.mp.microsoft.com,download.windowsupdate.com；ctldl.windowsupdate.com
+系统证书验证,crl.microsoft.com / ocsp.microsoft.com,crl.microsoft.com (系统在后台进行，您只需要检查系统或浏览器是否有证书报错)
+通用下载/CDN,download.microsoft.com / officecdn.microsoft.com,download.microsoft.com (尝试下载一个Windows工具或驱动)
+中国区服务,+.microsoftonline.cn / +.azure.cn / +.bing.com.cn,login.partner.microsoftonline.cn (登录)；cn.bing.com (搜索)
