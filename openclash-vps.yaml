@@ -1,5 +1,5 @@
 proxy-providers:
-  Airport1: #订阅名称，可自由更改
+  Airport1: #订阅名称，可自由更改，可添加多个注意名称不要一样
     url: "机场订阅填到这里，两端引号不要去掉，不要填写到下方链接里去！！"
     type: http
     interval: 86400
@@ -9,7 +9,6 @@ proxy-providers:
       interval: 300
     proxy: 直连
 
-# 节点信息
 proxies:
   - {name: 直连, type: direct}
 
@@ -28,13 +27,6 @@ keep-alive-interval: 15
 profile:
   store-selected: true
   store-fake-ip: true
-
-# 为防止使用插件朋友遇到面板问题，我注释掉了此模块。
-#external-controller: 0.0.0.0:9090
-#secret: ""
-#external-ui: ui
-#external-ui-name: zashboard
-#external-ui-url: "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
 
 # 嗅探（fakeip下其实可以不用嗅探）
 sniffer:
