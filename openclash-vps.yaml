@@ -142,7 +142,7 @@ rule-providers:
   proxy: { <<: *domain, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/Proxy.mrs"}
   direct: { <<: *domain, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/Direct.mrs"}
   starlinkhub: { <<: *class, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/StarlinkHub.list"}
-  ai: {  <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs" }
+  ai: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs" }
   youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
   google_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   telegram_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
