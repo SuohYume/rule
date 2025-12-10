@@ -124,7 +124,7 @@ rules:
   - RULE-SET,google_ip,Google,no-resolve
   - RULE-SET,geolocation-!cn,Proxy
   - RULE-SET,cn_domain,DIRECT
-  - RULE-SET,cn_ip,DIRECT,no-resolve
+  - RULE-SET,cn_ip,DIRECT
   - MATCH,Final
 
 # 规则集
