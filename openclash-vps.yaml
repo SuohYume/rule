@@ -74,8 +74,8 @@ dns:
 proxy-groups:
   - {name: Proxy, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
   - {name: Game, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
-  - {name: Bilibili, type: select, proxies: [DIRECT, Auto], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
-  - {name: StarlinkHub, type: select, proxies: [DIRECT, Auto], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
+  - {name: Bilibili, type: select, proxies: [DIRECT, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
+  - {name: StarlinkHub, type: select, proxies: [DIRECT, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
   - {name: AI, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
   - {name: Twitter, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
   - {name: YouTube, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
