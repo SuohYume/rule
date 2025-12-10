@@ -72,20 +72,20 @@ dns:
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
 # 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
 proxy-groups:
-  - {name: Proxy, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
-  - {name: Game, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
+  - {name: Proxy, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
+  - {name: Game, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
   - {name: Bilibili, type: select, proxies: [DIRECT, Auto], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
   - {name: StarlinkHub, type: select, proxies: [DIRECT, Auto], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
-  - {name: AI, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
-  - {name: Twitter, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
-  - {name: YouTube, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
-  - {name: Stream, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Stream.png"}
-  - {name: Social, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png"}
-  - {name: Bahamut, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bahamut_i.png"}
-  - {name: PayPal, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/PayPal.png"}
-  - {name: Google, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
-  - {name: Microsoft, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
-  - {name: Final, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
+  - {name: AI, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
+  - {name: Twitter, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
+  - {name: YouTube, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
+  - {name: Stream, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Stream.png"}
+  - {name: Social, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png"}
+  - {name: Bahamut, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bahamut_i.png"}
+  - {name: PayPal, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/PayPal.png"}
+  - {name: Google, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
+  - {name: Microsoft, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
+  - {name: Final, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
   - {name: Auto, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(DIRECT)).)*$", icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
 
 # 规则匹配
