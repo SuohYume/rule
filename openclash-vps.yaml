@@ -117,11 +117,11 @@ rules:
   - RULE-SET,paypal_domain,PayPal
   - RULE-SET,google_domain,Google
   - RULE-SET,microsoft_domain,Microsoft
-  - RULE-SET,twitter_ip,Twitter
-  - RULE-SET,netflix_ip,Stream
-  - RULE-SET,telegram_ip,Social
-  - RULE-SET,facebook_ip,Social
-  - RULE-SET,google_ip,Google
+  - RULE-SET,twitter_ip,Twitter,no-resolve
+  - RULE-SET,netflix_ip,Stream,no-resolve
+  - RULE-SET,telegram_ip,Social,no-resolve
+  - RULE-SET,facebook_ip,Social,no-resolve
+  - RULE-SET,google_ip,Google,no-resolve
   - RULE-SET,geolocation-!cn,Proxy
   - RULE-SET,cn_domain,DIRECT
   - RULE-SET,cn_ip,DIRECT,no-resolve
