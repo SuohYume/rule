@@ -86,7 +86,7 @@ proxy-groups:
   - {name: Google, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
   - {name: Microsoft, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
   - {name: Final, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
-  - {name: Auto, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(DIRECT)).)*$", icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
+  - {name: Auto, type: url-test, include-all: true, tolerance: 20, interval: 300, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
 
 # 规则匹配
 rules:
