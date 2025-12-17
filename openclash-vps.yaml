@@ -17,7 +17,7 @@ ipv6: false
 unified-delay: true
 tcp-concurrent: true
 log-level: warning
-find-process-mode: 'off'
+find-process-mode: off
 global-client-fingerprint: chrome
 keep-alive-idle: 600
 keep-alive-interval: 15
@@ -31,7 +31,7 @@ sniffer:
   sniff:
     HTTP:
       ports: [80, 8080-8880]
-      override-destination: false
+      override-destination: true
     TLS:
       ports: [443, 8443]
     QUIC:
@@ -40,7 +40,7 @@ sniffer:
     - "Mijia Cloud"
     - "+.push.apple.com"
 
-# 入站  
+# 入站
 tun:
   enable: true
   # system/gvisor/mixed
@@ -71,7 +71,7 @@ dns:
   nameserver:
     - 10.0.0.1:5225
   fake-ip-filter:
-    - rule-set:fakeipfilter_domain
+    - "rule-set:fakeipfilter_domain"
  
 # 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
