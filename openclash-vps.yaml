@@ -36,9 +36,6 @@ sniffer:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
-  skip-domain:
-    - "Mijia Cloud"
-    - "+.push.apple.com"
 
 # 入站
 tun:
