@@ -92,31 +92,31 @@ dns:
     - rule-set:microsoftcn_domain
     
 proxy-groups:
-  - {name: Proxy, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
-  - {name: Game, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
-  - {name: Bilibili, type: select, proxies: [DIRECT, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
-  - {name: StarlinkHub, type: select, proxies: [DIRECT, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
-  - {name: AI, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
-  - {name: Twitter, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
-  - {name: YouTube, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
-  - {name: Stream, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Stream.png"}
-  - {name: Social, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png"}
-  - {name: Bahamut, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bahamut_i.png"}
-  - {name: PayPal, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/PayPal.png"}
-  - {name: Google, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
-  - {name: Microsoft, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
-  - {name: Final, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
+  - {name: Proxy, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
+  - {name: Game, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
+  - {name: Bilibili, type: select, proxies: [Direct, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
+  - {name: StarlinkHub, type: select, proxies: [Direct, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
+  - {name: AI, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
+  - {name: Twitter, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
+  - {name: YouTube, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
+  - {name: Stream, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Stream.png"}
+  - {name: Social, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png"}
+  - {name: Bahamut, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bahamut_i.png"}
+  - {name: PayPal, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/PayPal.png"}
+  - {name: Google, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
+  - {name: Microsoft, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
+  - {name: Final, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
   - {name: Auto, type: url-test, include-all: true, tolerance: 20, interval: 300, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
   
 rules:
   - AND,((RULE-SET,geolocation-!cn),(DST-PORT,443),(NETWORK,UDP)),REJECT
-  - RULE-SET,private_ip,DIRECT,no-resolve
-  - RULE-SET,private_domain,DIRECT
-  - RULE-SET,category-games-cn,DIRECT
+  - RULE-SET,private_ip,Direct,no-resolve
+  - RULE-SET,private_domain,Direct
+  - RULE-SET,category-games-cn,Direct
   - RULE-SET,category-games-!cn,Game
   - RULE-SET,bilibili_domain,Bilibili
   - RULE-SET,starlinkhub,StarlinkHub
-  - RULE-SET,direct_domain,DIRECT
+  - RULE-SET,direct_domain,Direct
   - RULE-SET,ai,AI
   - RULE-SET,twitter_domain,Twitter
   - RULE-SET,youtube_domain,YouTube
@@ -137,7 +137,7 @@ rules:
   - RULE-SET,bahamut_domain,Bahamut
   - RULE-SET,paypal_domain,PayPal
   - RULE-SET,google_domain,Google
-  - RULE-SET,microsoftcn_domain,DIRECT
+  - RULE-SET,microsoftcn_domain,Direct
   - RULE-SET,microsoft_domain,Microsoft
   - RULE-SET,geolocation-!cn,Proxy
   - RULE-SET,twitter_ip,Twitter,no-resolve
@@ -145,7 +145,7 @@ rules:
   - RULE-SET,telegram_ip,Social,no-resolve
   - RULE-SET,facebook_ip,Social,no-resolve
   - RULE-SET,google_ip,Google,no-resolve
-  - RULE-SET,cn_ip,DIRECT,no-resolve
+  - RULE-SET,cn_ip,Direct,no-resolve
   - MATCH,Final
   
 rule-providers: 
