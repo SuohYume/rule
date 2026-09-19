@@ -1,15 +1,16 @@
-proxy-providers:
-  Airport1: #订阅名称，可自由更改，可添加多个注意名称不要一样
-    url: "机场订阅填到这里，两端引号不要去掉，不要填写到下方链接里去！！"
-    type: http
-    interval: 86400
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: DIRECT
+rule-anchor:
+  P: &P {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, proxy: Direct}
+  # 规则集
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  domain_text: &domain_text {type: http, interval: 86400, behavior: domain, format: text}
 
-# 全局配置 
+proxy-providers:
+  MirageGate: {<<: *P, url: "订阅URL"}
+
+proxies:
+  - {name: Direct, type: direct, udp: true}
+  
 mixed-port: 7890
 allow-lan: true
 bind-address: "*"
@@ -24,79 +25,98 @@ profile:
   store-selected: true
   store-fake-ip: true
 
-# 嗅探（fakeip下其实可以不用嗅探）
+geox-url:
+  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+
+tun:
+  enable: true
+  stack: mips   ##如果内核版本大于v1.19.31，此处可以改为自研协议栈 mips ，理论上性能更好。
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  route-exclude-address-set:
+    - cn_ip
+
 sniffer:
   enable: true
+  override-destination: false
+  force-dns-mapping: false
+  parse-pure-ip: true
   sniff:
     HTTP:
       ports: [80, 8080-8880]
-      override-destination: true
     TLS:
       ports: [443, 8443]
     QUIC:
       ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
 
-# 入站
-tun:
-  enable: true
-  # system/gvisor/mixed
-  stack: mixed
-  dns-hijack: ["any:53", "tcp://any:53"]
-  #使用nikki，混入全部不修改的情况，开启接口指定为nikki
-  #device: nikki
-  #使用仅内核自行修改下面三项为true
-  auto-route: false
-  auto-redirect: false
-  auto-detect-interface: false
-
-# DNS模块
 dns:
   enable: true
   cache-algorithm: arc
   listen: 0.0.0.0:7874
   ipv6: false
-  respect-rules: true
   enhanced-mode: fake-ip
+  fake-ip-ttl: 1
   fake-ip-range: 198.18.0.0/16
   fake-ip-filter-mode: blacklist
-  fake-ip-filter:
-    - "rule-set:fakeipfilter_domain"
   default-nameserver:
     - https://223.5.5.5/dns-query
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
+  direct-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    "rule-set:cn_domain,private_domain,fakeipfilter_cn,microsoftcn_domain":
+    - https://dns.alidns.com/dns-query#disable-qtype-65=true
+    - https://doh.pub/dns-query#disable-qtype-65=true
+    "rule-set:fakeipfilter_!cn":
+    - https://8.8.8.8/dns-query#默认代理&disable-qtype-65=true
   nameserver:
     - 10.0.0.1:5225
- 
-# 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
-# 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
-# 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
+  fallback:
+    - https://8.8.8.8/dns-query#默认代理
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+  fake-ip-filter:
+    - rule-set:fakeipfilter_cn
+    - rule-set:fakeipfilter_!cn
+    - rule-set:private_domain
+    - rule-set:cn_domain
+    - rule-set:microsoftcn_domain
+    
 proxy-groups:
-  - {name: Proxy, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
-  - {name: Game, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
-  - {name: Bilibili, type: select, proxies: [DIRECT, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
-  - {name: StarlinkHub, type: select, proxies: [DIRECT, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
-  - {name: AI, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
-  - {name: Twitter, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
-  - {name: YouTube, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
-  - {name: Stream, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Stream.png"}
-  - {name: Social, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png"}
-  - {name: Bahamut, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bahamut_i.png"}
-  - {name: PayPal, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/PayPal.png"}
-  - {name: Google, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
-  - {name: Microsoft, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
-  - {name: Final, type: select, proxies: [Auto, DIRECT], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
+  - {name: Proxy, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Flight.png"}
+  - {name: Game, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Game.png"}
+  - {name: Bilibili, type: select, proxies: [Direct, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bilibili_blue.png"}
+  - {name: StarlinkHub, type: select, proxies: [Direct, Proxy], icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Home.png"}
+  - {name: AI, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/AI_Tree.png"}
+  - {name: Twitter, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Twitter.png"}
+  - {name: YouTube, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/YouTube.png"}
+  - {name: Stream, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Stream.png"}
+  - {name: Social, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/SNS.png"}
+  - {name: Bahamut, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Bahamut_i.png"}
+  - {name: PayPal, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/PayPal.png"}
+  - {name: Google, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
+  - {name: Microsoft, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
+  - {name: Final, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
   - {name: Auto, type: url-test, include-all: true, tolerance: 20, interval: 300, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
-
-# 规则匹配
+  
 rules:
-  - RULE-SET,private_ip,DIRECT,no-resolve
-  - RULE-SET,private_domain,DIRECT
+  - AND,((RULE-SET,geolocation-!cn),(DST-PORT,443),(NETWORK,UDP)),REJECT
+  - RULE-SET,private_ip,Direct,no-resolve
+  - RULE-SET,private_domain,Direct
+  - RULE-SET,category-games-cn,Direct
   - RULE-SET,category-games-!cn,Game
   - RULE-SET,bilibili_domain,Bilibili
   - RULE-SET,starlinkhub,StarlinkHub
-  - RULE-SET,direct_domain,DIRECT
+  - RULE-SET,direct_domain,Direct
   - RULE-SET,ai,AI
   - RULE-SET,twitter_domain,Twitter
   - RULE-SET,youtube_domain,YouTube
@@ -117,35 +137,31 @@ rules:
   - RULE-SET,bahamut_domain,Bahamut
   - RULE-SET,paypal_domain,PayPal
   - RULE-SET,google_domain,Google
+  - RULE-SET,microsoftcn_domain,Direct
   - RULE-SET,microsoft_domain,Microsoft
+  - RULE-SET,geolocation-!cn,Proxy
   - RULE-SET,twitter_ip,Twitter,no-resolve
   - RULE-SET,netflix_ip,Stream,no-resolve
   - RULE-SET,telegram_ip,Social,no-resolve
   - RULE-SET,facebook_ip,Social,no-resolve
   - RULE-SET,google_ip,Google,no-resolve
-  - RULE-SET,geolocation-!cn,Proxy
-  - RULE-SET,cn_domain,DIRECT
-  - RULE-SET,cn_ip,DIRECT
+  - RULE-SET,cn_ip,Direct,no-resolve
   - MATCH,Final
-
-# 规则集
-## type：可选http/file/inline  behavior：可选domain/ipcidr/classical format：可选yaml/text/mrs
-rule-anchor:
-  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
-  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+  
 rule-providers: 
-  fakeipfilter_domain: { <<: *domain, url: "https://raw.githubusercontent.com/wwqgtxx/clash-rules/release/fakeip-filter.mrs"}
+  fakeipfilter_cn: {<<: *domain_text, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-cn.list"}
+  fakeipfilter_!cn: {<<: *domain_text, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/rules/fakeipfilter-!cn.list"}
   private_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   proxy_domain: { <<: *domain, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/Proxy.mrs"}
   direct_domain: { <<: *domain, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/Direct.mrs"}
-  starlinkhub: { <<: *class, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/StarlinkHub.list"}
+  starlinkhub: {type: http, interval: 86400, behavior: ipcidr, format: text, url: "https://raw.githubusercontent.com/SuohYume/rule/main/rule/StarlinkHub.list"}
   ai: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs" }
   youtube_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
   google_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   telegram_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
   netflix_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"}
   paypal_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"}
+  microsoftcn_domain: {<<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft@cn.mrs"}
   microsoft_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
   tiktok_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
   twitch_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitch.mrs"}
@@ -161,6 +177,7 @@ rule-providers:
   twitter_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs"}
   bilibili_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bilibili.mrs"}
   bahamut_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bahamut.mrs"}
+  category-games-cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs"}
   category-games-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games-!cn.mrs"}
   geolocation-!cn: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_domain: { <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
