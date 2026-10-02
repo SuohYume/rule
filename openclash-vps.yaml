@@ -106,7 +106,7 @@ proxy-groups:
   - {name: Google, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Google.png"}
   - {name: Microsoft, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Microsoft.png"}
   - {name: Final, type: select, proxies: [Auto], include-all: true, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Fish_b.png"}
-  - {name: Auto, type: url-test, include-all: true, tolerance: 20, interval: 300, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
+  - {name: Auto, type: url-test, use: [MirageGate], tolerance: 20, interval: 300, icon: "https://raw.githubusercontent.com/Vbaethon/HOMOMIX/main/Icon/Color/Large/Magic_Timer.png"}
   
 rules:
   - AND,((RULE-SET,geolocation-!cn),(DST-PORT,443),(NETWORK,UDP)),REJECT
